@@ -99,11 +99,11 @@ local Skyboxes = {
     },
     ["Pink Sky"] = {
         SkyboxLf = "rbxassetid://271042310",
-		SkyboxBk = "rbxassetid://271042516",
-		SkyboxDn = "rbxassetid://271077243",
-		SkyboxFt = "rbxassetid://271042556",
-		SkyboxRt = "rbxassetid://271042467",
-		SkyboxUp = "rbxassetid://271077958"
+	SkyboxBk = "rbxassetid://271042516",
+	SkyboxDn = "rbxassetid://271077243",
+	SkyboxFt = "rbxassetid://271042556",
+	SkyboxRt = "rbxassetid://271042467",
+	SkyboxUp = "rbxassetid://271077958"
     },
     ["Sunset"] = {
         SkyboxBk = "http://www.roblox.com/asset/?id=458016711",
@@ -124,10 +124,10 @@ local Skyboxes = {
     ["Evening"] = {
         SkyboxLf = "http://www.roblox.com/asset/?id=7950573918",
         SkyboxBk = "http://www.roblox.com/asset/?id=7950569153",
-		SkyboxDn = "http://www.roblox.com/asset/?id=7950570785",
-		SkyboxFt = "http://www.roblox.com/asset/?id=7950572449",
-		SkyboxRt = "http://www.roblox.com/asset/?id=7950575055",
-		SkyboxUp = "http://www.roblox.com/asset/?id=7950627627"
+	SkyboxDn = "http://www.roblox.com/asset/?id=7950570785",
+	SkyboxFt = "http://www.roblox.com/asset/?id=7950572449",
+	SkyboxRt = "http://www.roblox.com/asset/?id=7950575055",
+	SkyboxUp = "http://www.roblox.com/asset/?id=7950627627"
     }
 }
 local Hitsounds = {
@@ -161,8 +161,8 @@ local Killsounds = {
 }
 local Animations = {
     ['Idle'] = 'rbxassetid://2510196951',
-	['Fall Over'] = 'rbxassetid://3716468774',
-	['Floss'] = 'rbxassetid://5917459365',
+    ['Fall Over'] = 'rbxassetid://3716468774',
+    ['Floss'] = 'rbxassetid://5917459365',
     ['T Pose'] = "rbxassetid://3338010159",
     ['Dolphin'] = "rbxassetid://5918726674"
 }
