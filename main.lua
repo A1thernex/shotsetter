@@ -1671,11 +1671,15 @@ end
     end
 end)
 
-camera:GetPropertyChangedSignal("FieldOfView"):Connect(function(val)
-    if val == FOV then
+camera:GetPropertyChangedSignal("FieldOfView"):Connect(function()
+    if camera.FieldOfView == FOV then
         return
-    else
+    else if camera.FieldOfView < 75 and not FOV < 75 then -- we don't want to change the fov when zooming with guns with scopes, do we?
+        return
+    else if camera.FieldOfView == 75 then
         camera.FieldOfView = FOV
+    end
+    end
     end
 end)
 
