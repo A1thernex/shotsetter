@@ -12,16 +12,17 @@ Notification.prompt("Information", "Loading Shotsetter, please wait...", 4)
 local starttime = tick()
 
 --// Cache
+
 local game, workspace = game, workspace
-local loadstring, getgenv, getsenv, setclipboard, tablefind, camera, UserInputService, RunService = loadstring, getgenv, getsenv, setclipboard, table.find, workspace.CurrentCamera, game:GetService("UserInputService"), game:GetService("RunService")
+local loadstring, getgenv, setclipboard, tablefind, camera, UserInputService, RunService = loadstring, getgenv, setclipboard, table.find, workspace.CurrentCamera, game:GetService("UserInputService"), game:GetService("RunService")
 local localplayer = game.Players.LocalPlayer
 local replicatedstorage = game.ReplicatedStorage
---local client = getsenv(localplayer.PlayerGui.Client)
 
 local bodyvel = Instance.new("BodyVelocity")
 bodyvel.MaxForce = Vector3.new(math.huge, 0, math.huge)
 local animation = Instance.new("Animation")
 animation.AnimationId = "rbxassetid://5917459365"
+
 --// Loaded check
 
 if AirHub or AirHubV2Loaded then
@@ -38,8 +39,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/AirHub/main/Mo
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/AirHub/main/Modules/Wall%20Hack.lua"))()
 
 --// Variables
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/A1thernex/pepsilib-modified/main/main.lua"))()
---local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)() -- Pepsi's UI Library
+\local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)() -- Pepsi's UI Library
 local Aimbot, WallHack = getgenv().AirHub.Aimbot, getgenv().AirHub.WallHack
 local Parts, Fonts, TracersType = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"}, {"UI", "System", "Plex", "Monospace"}, {"Bottom", "Center", "Mouse"}
 local GodMode = false
@@ -54,41 +54,41 @@ local Other = {'Banana', 'Bayonet', 'Bearded Axe', 'Butterfly Knife', 'Smoke Gre
 local Everything = {"AK47", 'AUG', 'AWP', 'Bizon', 'CZ', 'XM', 'DesertEagle', 'DualBerettas', 'Famas', 'FiveSeven', 'USP', 'G3SG1', 'Galil', 'Glock', 'M249', 'M4A1', 'M4A4', 'MAC10', 'MAG7', 'MP7', 'MP7-SD', 'MP9', 'P90', 'RG', 'R8', 'SG', 'SawedOff', 'Scout', 'Tec9', 'P2000', 'UMP', 'P250', 'Nova', 'Negev', 'Banana', 'Bayonet', 'Bearded Axe', 'Butterfly Knife', 'Smoke Grenade', 'CT Knife', 'Cleaver', 'Crowbar', 'Falchion Knife', 'Flip Knife', 'Gut Knife', 'T Knife', 'Huntsman Knife', 'Karambit', 'Decoy Grenade', 'Flashbang', 'HE Grenade', 'Incendiary Grenade', 'Molotov', 'C4'}
 local Skyboxes = {
     ["Nebula"] = {
-	SkyboxLf = "rbxassetid://159454286",
-	SkyboxBk = "rbxassetid://159454299",
-	SkyboxDn = "rbxassetid://159454296",
-	SkyboxFt = "rbxassetid://159454293",
-	SkyboxLf = "rbxassetid://159454286",
-	SkyboxRt = "rbxassetid://159454300",
-	SkyboxUp = "rbxassetid://159454288",
-    },
+		SkyboxLf = "rbxassetid://159454286",
+		SkyboxBk = "rbxassetid://159454299",
+		SkyboxDn = "rbxassetid://159454296",
+		SkyboxFt = "rbxassetid://159454293",
+		SkyboxLf = "rbxassetid://159454286",
+		SkyboxRt = "rbxassetid://159454300",
+		SkyboxUp = "rbxassetid://159454288",
+	},
     ["Vaporwave"] = {
-	SkyboxLf = "rbxassetid://1417494402",
-	SkyboxBk = "rbxassetid://1417494030",
-	SkyboxDn = "rbxassetid://1417494146",
-	SkyboxFt = "rbxassetid://1417494253",
-	SkyboxLf = "rbxassetid://1417494402",
-	SkyboxRt = "rbxassetid://1417494499",
-	SkyboxUp = "rbxassetid://1417494643",
-    },
-    ["Clouds"] = {
-	SkyboxLf = "rbxassetid://570557620",
-	SkyboxBk = "rbxassetid://570557514",
-	SkyboxDn = "rbxassetid://570557775",
-	SkyboxFt = "rbxassetid://570557559",
-	SkyboxLf = "rbxassetid://570557620",
-	SkyboxRt = "rbxassetid://570557672",
-	SkyboxUp = "rbxassetid://570557727",
-    },
-    ["Twilight"] = {
-	SkyboxLf = "rbxassetid://264909758",
-	SkyboxBk = "rbxassetid://264908339",
-	SkyboxDn = "rbxassetid://264907909",
-	SkyboxFt = "rbxassetid://264909420",
-	SkyboxLf = "rbxassetid://264909758",
-	SkyboxRt = "rbxassetid://264908886",
-	SkyboxUp = "rbxassetid://264907379",
-    },
+		SkyboxLf = "rbxassetid://1417494402",
+		SkyboxBk = "rbxassetid://1417494030",
+		SkyboxDn = "rbxassetid://1417494146",
+		SkyboxFt = "rbxassetid://1417494253",
+		SkyboxLf = "rbxassetid://1417494402",
+		SkyboxRt = "rbxassetid://1417494499",
+		SkyboxUp = "rbxassetid://1417494643",
+	},
+	["Clouds"] = {
+		SkyboxLf = "rbxassetid://570557620",
+		SkyboxBk = "rbxassetid://570557514",
+		SkyboxDn = "rbxassetid://570557775",
+		SkyboxFt = "rbxassetid://570557559",
+		SkyboxLf = "rbxassetid://570557620",
+		SkyboxRt = "rbxassetid://570557672",
+		SkyboxUp = "rbxassetid://570557727",
+	},
+	["Twilight"] = {
+		SkyboxLf = "rbxassetid://264909758",
+		SkyboxBk = "rbxassetid://264908339",
+		SkyboxDn = "rbxassetid://264907909",
+		SkyboxFt = "rbxassetid://264909420",
+		SkyboxLf = "rbxassetid://264909758",
+		SkyboxRt = "rbxassetid://264908886",
+		SkyboxUp = "rbxassetid://264907379",
+	},
     ["Galaxy"] = {
         SkyboxBk = "http://www.roblox.com/asset/?id=159454299",
         SkyboxDn = "http://www.roblox.com/asset/?id=159454296",
@@ -99,11 +99,11 @@ local Skyboxes = {
     },
     ["Pink Sky"] = {
         SkyboxLf = "rbxassetid://271042310",
-	SkyboxBk = "rbxassetid://271042516",
-	SkyboxDn = "rbxassetid://271077243",
-	SkyboxFt = "rbxassetid://271042556",
-	SkyboxRt = "rbxassetid://271042467",
-	SkyboxUp = "rbxassetid://271077958"
+		SkyboxBk = "rbxassetid://271042516",
+		SkyboxDn = "rbxassetid://271077243",
+		SkyboxFt = "rbxassetid://271042556",
+		SkyboxRt = "rbxassetid://271042467",
+		SkyboxUp = "rbxassetid://271077958"
     },
     ["Sunset"] = {
         SkyboxBk = "http://www.roblox.com/asset/?id=458016711",
@@ -124,10 +124,10 @@ local Skyboxes = {
     ["Evening"] = {
         SkyboxLf = "http://www.roblox.com/asset/?id=7950573918",
         SkyboxBk = "http://www.roblox.com/asset/?id=7950569153",
-	SkyboxDn = "http://www.roblox.com/asset/?id=7950570785",
-	SkyboxFt = "http://www.roblox.com/asset/?id=7950572449",
-	SkyboxRt = "http://www.roblox.com/asset/?id=7950575055",
-	SkyboxUp = "http://www.roblox.com/asset/?id=7950627627"
+		SkyboxDn = "http://www.roblox.com/asset/?id=7950570785",
+		SkyboxFt = "http://www.roblox.com/asset/?id=7950572449",
+		SkyboxRt = "http://www.roblox.com/asset/?id=7950575055",
+		SkyboxUp = "http://www.roblox.com/asset/?id=7950627627"
     }
 }
 local Hitsounds = {
@@ -161,8 +161,8 @@ local Killsounds = {
 }
 local Animations = {
     ['Idle'] = 'rbxassetid://2510196951',
-    ['Fall Over'] = 'rbxassetid://3716468774',
-    ['Floss'] = 'rbxassetid://5917459365',
+	['Fall Over'] = 'rbxassetid://3716468774',
+	['Floss'] = 'rbxassetid://5917459365',
     ['T Pose'] = "rbxassetid://3338010159",
     ['Dolphin'] = "rbxassetid://5918726674"
 }
@@ -172,9 +172,7 @@ local Pitches = {
     ['180'] = 2.5
     -- more will be added soon :)
 }
---{"None", "Nebula", "Pink Sky", "Evening", "Twilight", "Night", "Sunset", "Galaxy", "Clouds", "Vaporwave"}
---{"None", "Baimware", "Bag", "Minecraft EXP", "Skeet", "Neverlose", "Rust", "Bell", "Bubble", "Pick", "Pop", "Minecraft Arrow Hit"}
---{"None", "CS:GO", "Ultra Kill", "Killing Spree"}
+
 --// Actual functions
 
 local function YROTATION(cframe)
@@ -206,6 +204,10 @@ local function makelist(tbl)
     return fulltbl
 end
 
+local function warngunmod()
+    Notification.prompt("Information", "Re-buy the weapon(s) for the modifications!", 4)
+end
+
 --// God Mode
 
 RunService.RenderStepped:Connect(function()
@@ -220,26 +222,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
---// Theme initialization (abandoned)
---[[print("hello")
-if isfolder("Pepsi Lib") then
-    print("again")
-    if not isfolder("Pepsi Lib Themes") then
-        makefolder("Pepsi Lib Themes")   
-    end
-    if isfile("Pepsi Lib/Pepsi Lib Themes/AirHub.txt") and isfile("Pepsi Lib/Pepsi Lib Themes/Shotsetter.txt") then
-        print("sdasd")
-        return
-    else
-        writefile("Pepsi Lib/Pepsi Lib Themes/AirHub.txt", '{"__Designer.Colors.topGradient":"3F0C64","__Designer.Colors.section":"C259FB","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"391D57","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"160B24","__Designer.Background.ImageTransparency":100,"__Designer.Colors.background":"1E1237","__Designer.Colors.innerBorder":"531E79","__Designer.Colors.bottomGradient":"361A60","__Designer.Colors.sectionBackground":"21002C","__Designer.Colors.hoveredOptionTop":"6B10F9","__Designer.Colors.otherElementText":"7B44A8","__Designer.Colors.main":"AB26FF","__Designer.Colors.elementText":"9F7DB5","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}')
-        writefile("Pepsi Lib/Pepsi Lib Themes/Shotsetter.txt", '{"__Designer.Colors.topGradient":"343434","__Designer.Settings.ShowHideKey":"Enum.KeyCode.RightShift","__Designer.Colors.section":"FFFFFF","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"000000","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"000000","__Designer.Colors.sectionBackground":"121212","__Designer.Colors.innerBorder":"4E4E4E","__Designer.Background.ImageTransparency":100,"__Designer.Colors.bottomGradient":"0D0D0D","__Designer.Colors.elementText":"FFFFFF","__Designer.Colors.hoveredOptionTop":"FF0083","__Designer.Colors.otherElementText":"FFFFFF","__Designer.Colors.main":"F8F8F8","__Designer.Colors.background":"161616","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}')
-    end
-else
-    makefolder("Pepsi Lib")
-    makefolder("Pepsi Lib/Pepsi Lib Themes")
-    writefile("Pepsi Lib/Pepsi Lib Themes/AirHub.txt", '{"__Designer.Colors.topGradient":"3F0C64","__Designer.Colors.section":"C259FB","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"391D57","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"160B24","__Designer.Background.ImageTransparency":100,"__Designer.Colors.background":"1E1237","__Designer.Colors.innerBorder":"531E79","__Designer.Colors.bottomGradient":"361A60","__Designer.Colors.sectionBackground":"21002C","__Designer.Colors.hoveredOptionTop":"6B10F9","__Designer.Colors.otherElementText":"7B44A8","__Designer.Colors.main":"AB26FF","__Designer.Colors.elementText":"9F7DB5","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}')
-    writefile("Pepsi Lib/Pepsi Lib Themes/Shotsetter.txt", '{"__Designer.Colors.topGradient":"343434","__Designer.Settings.ShowHideKey":"Enum.KeyCode.RightShift","__Designer.Colors.section":"FFFFFF","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"000000","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"000000","__Designer.Colors.sectionBackground":"121212","__Designer.Colors.innerBorder":"4E4E4E","__Designer.Background.ImageTransparency":100,"__Designer.Colors.bottomGradient":"0D0D0D","__Designer.Colors.elementText":"FFFFFF","__Designer.Colors.hoveredOptionTop":"FF0083","__Designer.Colors.otherElementText":"FFFFFF","__Designer.Colors.main":"F8F8F8","__Designer.Colors.background":"161616","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}')
-end]]
 --// Frame
 
 Library.UnloadCallback = function()
@@ -251,15 +233,11 @@ end
 local MainFrame = Library:CreateWindow({
 	Name = "Shotsetter",
 	Themeable = {
-		--Image = "7059346386",
         Info = {'Original (AirHub) by Exunys', 'Made by A1thernex', 'Some code taken from stormy.so-', 'lutions', "Powered by Pepsi's UI Library"},
-		--Info = "\n\n\nOriginal (AirHub) by Exunys\nMade by A1thernex\nSome code taken from\nstormy.solutions\nPowered by Pepsi's UI Library",
-		Credit = false
+        Credit = false
 	},
 	Background = "",
     Theme = [[{"__Designer.Colors.topGradient":"343434","__Designer.Settings.ShowHideKey":"Enum.KeyCode.RightShift","__Designer.Colors.section":"FFFFFF","__Designer.Colors.hoveredOptionBottom":"303030","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"403F3F","__Designer.Colors.unselectedOption":"3A3A3A","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"414141","__Designer.Colors.outerBorder":"000000","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"DBDADA","__Designer.Colors.elementBorder":"000000","__Designer.Colors.sectionBackground":"121212","__Designer.Colors.innerBorder":"525252","__Designer.Background.ImageTransparency":100,"__Designer.Colors.bottomGradient":"0D0D0D","__Designer.Colors.elementText":"FFFFFF","__Designer.Colors.hoveredOptionTop":"666666","__Designer.Colors.otherElementText":"FFFFFF","__Designer.Colors.main":"FFFFFF","__Designer.Colors.background":"161616","__Designer.Colors.unhoveredOptionBottom":"212121","__Designer.Background.UseBackgroundImage":false}]]
-    -- airhub default theme
-	--Theme = [[{"__Designer.Colors.topGradient":"3F0C64","__Designer.Colors.section":"C259FB","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"391D57","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"160B24","__Designer.Background.ImageTransparency":100,"__Designer.Colors.background":"1E1237","__Designer.Colors.innerBorder":"531E79","__Designer.Colors.bottomGradient":"361A60","__Designer.Colors.sectionBackground":"21002C","__Designer.Colors.hoveredOptionTop":"6B10F9","__Designer.Colors.otherElementText":"7B44A8","__Designer.Colors.main":"AB26FF","__Designer.Colors.elementText":"9F7DB5","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}]]
 })
 
 --// Tabs
@@ -420,16 +398,6 @@ Values:AddTextbox({ -- Using a Textbox instead of a Keybind because the UI Libra
 		Aimbot.Settings.TriggerKey = New
 	end
 }).Default = Aimbot.Settings.TriggerKey
-
---[[
-Values:AddKeybind({
-	Name = "Hotkey",
-	Value = Aimbot.Settings.TriggerKey,
-	Callback = function(New, Old)
-		Aimbot.Settings.TriggerKey = stringmatch(tostring(New), "Enum%.[UserInputType]*[KeyCode]*%.(.+)")
-	end,
-}).Default = Aimbot.Settings.TriggerKey
-]]
 
 Values:AddSlider({
 	Name = "Sensitivity",
@@ -1239,9 +1207,11 @@ CBModsSection:AddToggle({
 CBModsSection:AddButton({
     Name = "Infinite Ammo",
     Callback = function()
+        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Guns, v.Name) then
-                v.Ammo.Value = 999999
+                v.Ammo.Value = 9999
+                v.StoredAmmo.Value = 69
             end
         end
         Notification.prompt("Infinite Ammo", "Re-buy the weapon to get infinite ammo.", 4)
@@ -1249,8 +1219,9 @@ CBModsSection:AddButton({
 })
 
 CBModsSection:AddButton({
-    Name = "No Spread (maybe?)",
+    Name = "No Spread",
     Callback = function()
+        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Guns, v.Name) then
                 v.Spread.Value = 0 -- fuck this shit, iteration in lua is so weird
@@ -1267,12 +1238,28 @@ CBModsSection:AddButton({
                 v.Spread.Ladder.Value = 0
                 v.Spread.RecoveryTime.Value = 0
                 v.Spread.RecoveryTime.Crouched.Value = 0
+
                 if v.Spread:FindFirstChild("Fire") then
                     v.Spread.Fire.Value = 0
                 end
                 if v.Spread:FindFirstChild("TimeToIdle") then
                     v.Spread.TimeToIdle.Value = 0
                 end
+                v.RangeModifier.Value = 0
+                v.AccuracyOffset.Value = 0
+                v.AccuracyDivisor.Value = 0
+            end
+        end
+    end
+})
+
+CBModsSection:AddButton({
+    Name = "Rapid Fire",
+    Callback = function()
+        warngunmod()
+        for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
+            if table.find(Everything, v.Name) then
+                v.FireRate.Value = 0
             end
         end
     end
@@ -1281,9 +1268,22 @@ CBModsSection:AddButton({
 CBModsSection:AddButton({
     Name = "Instant Equip",
     Callback = function()
+        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Everything, v.Name) then
-                v.EquipTime.Value = 0
+                v.EquipTime.Value = 0.0000001 -- setting to 0 doesn't work, sadly
+            end
+        end
+    end
+})
+
+CBModsSection:AddButton({
+    Name = "Instant Reload",
+    Callback = function()
+        warngunmod()
+        for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
+            if table.find(Everything, v.Name) then
+                v.ReloadTime.Value = 0
             end
         end
     end
@@ -1311,6 +1311,30 @@ CBExploitsSection:AddToggle({
     Key = "X",
     Callback = function(val)
         GodMode = val
+    end
+})
+
+CBExploitsSection:AddToggle({
+    Name = "Rifle On First Round",
+    Value = false,
+    Key = "",
+    Callback = function(val)
+        RifleFR = val
+        for _,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
+            if val == true then
+                if v:FindFirstChild("Primary") and not v:FindFirstChild("Melee") and not v:FindFirstChild("Grenade") and not v:FindFirstChild("Equipment2") then
+                    v.Primary.Name = "Secondary"
+                    primary = Instance.new("Folder")
+                    primary.Parent = v
+                    primary.Name = "Primarybak"
+                end
+            else
+                if not v:FindFirstChild("Melee") and not v:FindFirstChild("Grenade") and not v:FindFirstChild("Equipment2") then
+                    v.Primarybak.Name = "Primary"
+                    v.Secondary:Destroy()
+                end
+            end
+        end
     end
 })
 
@@ -1458,7 +1482,6 @@ CBVisualSection:AddSlider({
 CBVisualSection:AddDropdown({
     Name = "Skybox",
     List = makelist(Skyboxes),
-    --List = {"None", "Nebula", "Pink Sky", "Evening", "Twilight", "Night", "Sunset", "Galaxy", "Clouds", "Vaporwave"},
     Value = "None",
     Callback = function(sky)
     ChosenSky = sky
@@ -1694,17 +1717,10 @@ localplayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(fu
     else
         hitsound.SoundId = "rbxassetid://" .. Hitsounds[Hitsound]
     end
-	--sound.SoundId = Hitsound == "Skeet" and "rbxassetid://5447626464" or Hitsound == "Rust" and "rbxassetid://5043539486" or Hitsound == "Bag" and "rbxassetid://364942410" or Hitsound == "Baimware" and "rbxassetid://6607339542" or Hitsound == "Custom" and "rbxassetid://" .. CustomSound or "rbxassetid://6607204501"
 	hitsound.Volume = HitsoundVolume
 	hitsound.PlayOnRemove = true
 	hitsound:Destroy()
 end)
-
---[[localplayer:GetPropertyChangedSignal("CameraMaxZoomDistance"):Connect(function()
-if localplayer.CameraMaxZoomDistance == TPDistance then return end
-    localplayer.CameraMinZoomDistance = val
-    localplayer.CameraMaxZoomDistance = val
-end)]]
 
 localplayer.Additionals.OverallKills:GetPropertyChangedSignal("Value"):Connect(function()
     if Killsound == "None" then return end
@@ -1716,8 +1732,7 @@ localplayer.Additionals.OverallKills:GetPropertyChangedSignal("Value"):Connect(f
     else
         killsound.SoundId = "rbxassetid://" .. Killsounds[Killsound]
     end
-	--sound.SoundId = Hitsound == "Skeet" and "rbxassetid://5447626464" or Hitsound == "Rust" and "rbxassetid://5043539486" or Hitsound == "Bag" and "rbxassetid://364942410" or Hitsound == "Baimware" and "rbxassetid://6607339542" or Hitsound == "Custom" and "rbxassetid://" .. CustomSound or "rbxassetid://6607204501"
-	killsound.Volume = KillsoundVolume
+    killsound.Volume = KillsoundVolume
 	killsound.PlayOnRemove = true
 	killsound:Destroy()
 end)
@@ -1786,6 +1801,26 @@ localplayer.CharacterAdded:Connect(function()
             anim:AdjustSpeed(AnimSpeed)
         end
 	end
+end)
+
+workspace.Status.Rounds:GetPropertyChangedSignal("Value"):Connect(function()
+    if RifleFR and workspace.Status.Rounds.Value == 1 then
+        for _,v in pairs(weapons:GetChildren()) do
+            if v:FindFirstChild("Primary") and not v:FindFirstChild("Melee") and not v:FindFirstChild("Grenade") and not v:FindFirstChild("Equipment2") then
+                v.Primary.Name = "Secondary"
+                primary = Instance.new("Folder")
+                primary.Parent = v
+                primary.Name = "Primarybak"
+            end
+        end
+    elseif RifleFR and workspace.Status.Rounds.Value > 1 then
+        for _,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
+            if v:FindFirstChild("Primarybak") and not v:FindFirstChild("Melee") and not v:FindFirstChild("Melee") and not v:FindFirstChild("Grenade") and not v:FindFirstChild("Equipment2") then
+                v.Primarybak.Name = "Primary"
+                v.Secondary:Destroy()
+            end
+        end
+    end
 end)
 
 local endtime = tick()
