@@ -48,6 +48,7 @@ local oldSkybox, anim
 local AnimSpeed = 1
 local Spin = 0
 local Mouse = localplayer:GetMouse()
+local FOV = 75
 local TPDistance, ThirdPerson = 12, false
 local Guns = {"AK47", 'AUG', 'AWP', 'Bizon', 'CZ', 'XM', 'DesertEagle', 'DualBerettas', 'Famas', 'FiveSeven', 'USP', 'G3SG1', 'Galil', 'Glock', 'M249', 'M4A1', 'M4A4', 'MAC10', 'MAG7', 'MP7', 'MP7-SD', 'MP9', 'P90', 'RG', 'R8', 'SG', 'SawedOff', 'Scout', 'Tec9', 'P2000', 'UMP', 'P250', 'Nova', 'Negev'}
 local Other = {'Banana', 'Bayonet', 'Bearded Axe', 'Butterfly Knife', 'Smoke Grenade', 'CT Knife', 'Cleaver', 'Crowbar', 'Falchion Knife', 'Flip Knife', 'Gut Knife', 'T Knife', 'Huntsman Knife', 'Karambit', 'Decoy Grenade', 'Flashbang', 'HE Grenade', 'Incendiary Grenade', 'Molotov', 'C4'}
@@ -204,10 +205,6 @@ local function makelist(tbl)
     return fulltbl
 end
 
-local function warngunmod()
-    Notification.prompt("Information", "Re-buy the weapon(s) for the modifications!", 4)
-end
-
 --// God Mode
 
 RunService.RenderStepped:Connect(function()
@@ -230,10 +227,13 @@ Library.UnloadCallback = function()
 	getgenv().AirHub = nil
 end
 
+local version = game:HttpGet("https://raw.githubusercontent.com/A1thernex/shotsetter/main/version.txt")
+print(version)
+
 local MainFrame = Library:CreateWindow({
 	Name = "Shotsetter",
 	Themeable = {
-        Info = {'Original (AirHub) by Exunys', 'Made by A1thernex', 'Some code taken from stormy.so-', 'lutions', "Powered by Pepsi's UI Library"},
+        Info = {'\nShotsetter '..version, 'Original (AirHub) by Exunys', 'Made by A1thernex', 'Some code taken from stormy.so-', 'lutions', "Powered by Pepsi's UI Library"},
         Credit = false
 	},
 	Background = "",
@@ -1207,7 +1207,6 @@ CBModsSection:AddToggle({
 CBModsSection:AddButton({
     Name = "Infinite Ammo",
     Callback = function()
-        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Guns, v.Name) then
                 v.Ammo.Value = 9999
@@ -1220,8 +1219,8 @@ CBModsSection:AddButton({
 
 CBModsSection:AddButton({
     Name = "No Spread",
-    Callback = function()
-        warngunmod()
+    Callback = function(val)
+        Notification.prompt("Warning", "Weapons that break with No Spread applied: Every pistol, AWP.")
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Guns, v.Name) then
                 v.Spread.Value = 0 -- fuck this shit, iteration in lua is so weird
@@ -1238,7 +1237,6 @@ CBModsSection:AddButton({
                 v.Spread.Ladder.Value = 0
                 v.Spread.RecoveryTime.Value = 0
                 v.Spread.RecoveryTime.Crouched.Value = 0
-
                 if v.Spread:FindFirstChild("Fire") then
                     v.Spread.Fire.Value = 0
                 end
@@ -1256,7 +1254,6 @@ CBModsSection:AddButton({
 CBModsSection:AddButton({
     Name = "Rapid Fire",
     Callback = function()
-        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Everything, v.Name) then
                 v.FireRate.Value = 0
@@ -1268,7 +1265,6 @@ CBModsSection:AddButton({
 CBModsSection:AddButton({
     Name = "Instant Equip",
     Callback = function()
-        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Everything, v.Name) then
                 v.EquipTime.Value = 0.0000001 -- setting to 0 doesn't work, sadly
@@ -1280,7 +1276,6 @@ CBModsSection:AddButton({
 CBModsSection:AddButton({
     Name = "Instant Reload",
     Callback = function()
-        warngunmod()
         for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
             if table.find(Everything, v.Name) then
                 v.ReloadTime.Value = 0
@@ -1335,6 +1330,28 @@ CBExploitsSection:AddToggle({
                 end
             end
         end
+    end
+})
+
+CBExploitsSection:AddToggle({
+    Name = "Anti Flash",
+    Value = false,
+    Key = "",
+    Callback = function(val)
+        if val then
+            localplayer.PlayerGui.Blnd.Blind.Name = "Blindbak"
+        else
+            localplayer.PlayerGui.Blnd.Blindbak.Name = "Blind"
+        end
+    end
+})
+
+CBExploitsSection:AddToggle({
+    Name = "Anti Smoke",
+    Value = false,
+    Key = "",
+    Callback = function(val)
+        AntiSmoke = val
     end
 })
 
@@ -1625,6 +1642,15 @@ end
 local Alive = false
 local CamLook = camera.CFrame.LookVector
 local hrp = nil
+
+if AntiSmoke then
+    for i,v in pairs(workspace.Ray_Ignore.Smokes:GetChildren()) do
+        if v.Name == "Smoke" then
+            v:Destroy()
+        end
+    end
+end
+
 if localplayer.Character and localplayer.Character:FindFirstChild("Humanoid") and localplayer.Character:FindFirstChild("Humanoid").Health > 0 and localplayer.Character:FindFirstChild("UpperTorso") then
 	Alive = true
 end
@@ -1752,6 +1778,7 @@ workspace.ChildAdded:Connect(function(obj)
 			oldSkybox = nil
 		end
 		local Origin = workspace:WaitForChild("Map"):WaitForChild("Origin")
+        print("Origin: " .. origin)
 		if workspace.Map.Origin.Value == "de_cache" or workspace.Map.Origin.Value == "de_vertigo" or workspace.Map.Origin.Value == "de_nuke" or workspace.Map.Origin.Value == "de_aztec" then
 			oldSkybox = game.Lighting:FindFirstChildOfClass("Sky"):Clone()
  
@@ -1803,6 +1830,38 @@ localplayer.CharacterAdded:Connect(function()
 	end
 end)
 
+--[[game.ReplicatedStorage.Weapons.AWP.Spread:GetPropertyChangedSignal("Value"):Connect(function()
+    print("changed spread value")
+    if NoSpread then
+        for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
+            if table.find(Guns, v.Name) then
+                v.Spread.Value = 0 -- fuck this shit, iteration in lua is so weird
+                v.Spread.Stand.Value = 0
+                v.Spread.MaxInaccuracy.Value = 0
+                v.Spread.Crouch.Value = 0
+                if v.Spread:FindFirstChild("Move") then
+                    v.Spread.Move.Value = 0
+                else
+                    v.Spread.Crouch.Move.Value = 0
+                end
+                v.Spread.Jump.Value = 0
+                v.Spread.Land.Value = 0
+                v.Spread.Ladder.Value = 0
+                v.Spread.RecoveryTime.Value = 0
+                v.Spread.RecoveryTime.Crouched.Value = 0
+                if v.Spread:FindFirstChild("Fire") then
+                    v.Spread.Fire.Value = 0
+                end
+                if v.Spread:FindFirstChild("TimeToIdle") then
+                v.Spread.TimeToIdle.Value = 0
+                end
+                v.RangeModifier.Value = 1
+                v.AccuracyOffset.Value = 0.0000001
+            end
+        end
+    end
+end)]]
+
 workspace.Status.Rounds:GetPropertyChangedSignal("Value"):Connect(function()
     if RifleFR and workspace.Status.Rounds.Value == 1 then
         for _,v in pairs(weapons:GetChildren()) do
@@ -1822,6 +1881,17 @@ workspace.Status.Rounds:GetPropertyChangedSignal("Value"):Connect(function()
         end
     end
 end)
+
+--[[print("are we even here yet??")
+game.Players.LocalPlayer.PlayerGui.Blnd.Blind:GetPropertyChangedSignal("Visible"):Connect(function()
+    print("Value changed: " .. game.Players.LocalPlayer.PlayerGui.Blnd.Blind.Visible)
+    if AntiFlash then
+        if game.Players.LocalPlayer.PlayerGui.Blnd.Blind.Visible then
+            print("seems to be true")
+            game.Players.LocalPlayer.PlayerGui.Blnd.Blind.Visible = false
+        end
+    end
+end)]]
 
 local endtime = tick()
 local totaltime = math.floor((endtime - starttime) * 10^2) / 10^2 .. "s to load."
