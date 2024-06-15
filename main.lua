@@ -1947,7 +1947,7 @@ SaveManager:IgnoreThemeSettings()
 SaveManager:SetIgnoreIndexes({'MenuKeybind'})
 
 ThemeManager:SetFolder('Shotsetter')
-SaveManager:SetFolder('Shotsetter/Configs')
+SaveManager:SetFolder('Shotsetter/configs')
 
 SaveManager:BuildConfigSection(SettingsTab)
 
