@@ -5,5 +5,5 @@ Most pasted code taken from stormy.solutions.
 Loader
 --
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/A1thernex/shotsetter/main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/A1thernex/shotsetter/main/main.lua"))()
 ```
