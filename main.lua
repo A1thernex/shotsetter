@@ -18,7 +18,7 @@ local vector3, color3rgb = Vector3.new, Color3.fromRGB
 local workcamera = workspace.Camera
 local players = game:GetService("Players")
 local localplayer = players.LocalPlayer
-local replicatedstorage = game:GetService("ReplicatedStorage")
+local replicatedstorage = game.ReplicatedStorage
 
 local bodyvel = Instance.new("BodyVelocity")
 bodyvel.MaxForce = vector3(math.huge, 0, math.huge)
